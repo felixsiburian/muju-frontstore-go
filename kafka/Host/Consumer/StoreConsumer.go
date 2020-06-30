@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"github.com/Shopify/sarama"
+	"github.com/joho/godotenv"
 	"log"
 	"muju-frontstore-go/domain/model"
 	"muju-frontstore-go/domain/repository"
@@ -90,8 +91,8 @@ func consumeStore(topics []string, master sarama.Consumer) (chan *sarama.Consume
 }
 
 func NewStoresConsumer() {
-
-	brokers := []string{"52.185.161.109:9092"}
+	godotenv.Load(".env")
+	brokers := []string{os.Getenv("KAFKA_IP")}
 
 	kafkaConfig := Config.GetKafkaConfig("", "")
 

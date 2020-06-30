@@ -4,14 +4,17 @@ import (
 	"encoding/json"
 	"fmt"
 	"github.com/Shopify/sarama"
+	"github.com/joho/godotenv"
 	"github.com/labstack/echo"
 	"log"
 	"muju-frontstore-go/domain/model"
 	"muju-frontstore-go/kafka/Host/Config"
 	"net/http"
+	"os"
 )
 
 func PublishCreateStore(c echo.Context) error {
+	godotenv.Load(".env")
 	data := new(model.Store)
 	err := json.NewDecoder(c.Request().Body).Decode(&data)
 	//err := c.Bind(data)
@@ -23,7 +26,7 @@ func PublishCreateStore(c echo.Context) error {
 
 	kafkaConfig := Config.GetKafkaConfig("", "")
 
-	producer, err := sarama.NewSyncProducer([]string{"52.185.161.109:9092"}, kafkaConfig)
+	producer, err := sarama.NewSyncProducer([]string{os.Getenv("KAFKA_IP")}, kafkaConfig)
 
 	if err != nil {
 
