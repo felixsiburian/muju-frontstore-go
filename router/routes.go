@@ -6,6 +6,7 @@ import (
 	"github.com/labstack/echo/middleware"
 	"muju-frontstore-go/kafka/API/Store"
 	"muju-frontstore-go/kafka/Host"
+	grapqhl "muju-frontstore-go/grapqhl"
 )
 
 func New() *echo.Echo {
@@ -21,6 +22,8 @@ func New() *echo.Echo {
 		}
 		return false, nil
 	}))
+
+	grapqhl.MainGroup(e)
 
 	e.POST("/CreateStores", Store.PublishCreateStore)
 	e.POST("/DeleteStores", Store.PublishDeleteStore)

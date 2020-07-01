@@ -16,7 +16,7 @@ type Store struct {
 	ModifiedBy        string    `json:"modified_by"`
 	ModifiedDate      time.Time `json:"modified_date"`
 	DeletedBy         string    `json:"deleted_by"`
-	DeletedDate        time.Time `json:"deleted_date"`
+	DeletedDate       time.Time `json:"deleted_date"`
 	Active            bool      `json:"active"`
 	IsDeleted         bool      `json:"is_deleted"`
 }
@@ -27,15 +27,14 @@ type Country struct {
 }
 
 type Province struct {
-	Id        int    `gorm:"AUTO_INCREMENT;PRIMARY_KEY;NOT NULL"; json:"id"'`
-	CountryId int    `json:"country_id"`
-	Province  string `json:"province"`
+	Id           int    `gorm:"AUTO_INCREMENT;PRIMARY_KEY;NOT NULL"; json:"id"'`
+	ProvinceName string `json:"province_name"` 
 }
 
 type City struct {
-	Id         int    `gorm:"AUTO_INCREMENT;PRIMARY_KEY;NOT NULL"; json:"id"'`
 	ProvinceId int    `json:"province_id"`
-	City       string `json:"city"`
+	Id         int    `gorm:"AUTO_INCREMENT;PRIMARY_KEY;NOT NULL"; json:"id"'`
+	CityName   string `json:"city_name"`
 }
 
 type Transaction struct {

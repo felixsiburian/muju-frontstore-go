@@ -1,6 +1,8 @@
 package repository
 
 import (
+	"database/sql"
+	"fmt"
 	"log"
 	"muju-frontstore-go/database"
 	"muju-frontstore-go/domain/model"
@@ -30,7 +32,7 @@ func CreateStores(store *model.Store) error {
 	if err != nil {
 		log.Fatal(err)
 	}
-
+	defer db.Close()
 	return err
 }
 
@@ -48,6 +50,7 @@ func UpdateStores(store *model.Store) error {
 	if err != nil {
 		log.Fatal(err)
 	}
+	defer db.Close()
 	return err
 }
 
@@ -61,5 +64,56 @@ func DeleteStores(store *model.Store) error {
 		log.Fatal(err)
 	}
 	store.DeletedDate = time.Now()
+	defer db.Close()
 	return err
+}
+
+func GetStore(page *int, size *int) []model.Store {
+	db := database.ConnectionDB()
+	var stores []model.Store
+	var rows *sql.Rows
+	var total int
+	var err error
+
+	if page == nil && size == nil {
+		fmt.Println("masuk 1")
+		rows, err = db.Find(&stores).Order("created_date desc").Rows()
+		if err != nil {
+			log.Fatal(err)
+		}
+	}
+
+	if page != nil && size != nil {
+		rows, err = db.Debug().Find(&stores).Order("created_date desc").Count(total).Limit(*size).Offset(*page).Rows()
+		if err != nil {
+			log.Fatal(err)
+		}
+	}
+
+	result := make([]model.Store, 0)
+	for rows.Next() {
+		s := &model.Store{}
+		err = rows.Scan(
+			&s.Id,
+			&s.StoreName,
+			&s.StoreDomain,
+			&s.ProductCategoryId,
+			&s.CountryId,
+			&s.ProvinceId,
+			&s.CityId,
+			&s.PostalCode,
+			&s.CreatedBy,
+			&s.CreatedDate,
+			&s.ModifiedBy,
+			&s.ModifiedDate,
+			&s.DeletedBy,
+			&s.DeletedDate,
+			&s.Active,
+			&s.IsDeleted,
+		)
+
+		result = append(result, *s)
+	}
+	defer db.Close()
+	return result
 }
