@@ -1,0 +1,17 @@
+version: '3'
+
+services:
+
+  muju-frontstore:
+    image: muju/frontstore:${TAG:-1.0-dev}
+    build:
+      context: .
+      dockerfile: Dockerfile
+    env_file:
+      - .env
+    environment:
+      - DB_DRIVER=postgres
+      - CONN=host=localhost port=5432 user=Muju dbname=MulaiJualan sslmode=disable password=Standar123.
+      - KAFKA_IP=52.185.161.109:9092
+    ports:
+      - "3000:80"

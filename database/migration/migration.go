@@ -5,7 +5,7 @@ import (
 	"muju-frontstore-go/domain/model"
 )
 
-func main () {
+func main()  {
 	db := database.ConnectionDB()
 	db.AutoMigrate(&model.Store{})
 }
