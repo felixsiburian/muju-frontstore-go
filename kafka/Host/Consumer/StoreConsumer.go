@@ -7,7 +7,7 @@ import (
 	"github.com/joho/godotenv"
 	"log"
 	"muju-frontstore-go/domain/model"
-	"muju-frontstore-go/domain/repository"
+	store2 "muju-frontstore-go/domain/repository/store"
 	"muju-frontstore-go/kafka/Host/Config"
 	"os"
 	"os/signal"
@@ -50,7 +50,7 @@ func consumeStore(topics []string, master sarama.Consumer) (chan *sarama.Consume
 							fmt.Println("Error : ",err.Error())
 							os.Exit(1)
 						}
-						err = repository.CreateStores(&store)
+						err = store2.CreateStores(&store)
 						if err != nil {
 							log.Fatal(err)
 						}
@@ -63,7 +63,7 @@ func consumeStore(topics []string, master sarama.Consumer) (chan *sarama.Consume
 							fmt.Println("Error : ", err.Error())
 							log.Fatal(err)
 						}
-						err = repository.UpdateStores(&store)
+						err = store2.UpdateStores(&store)
 						if err != nil {
 							log.Fatal(err)
 						}
@@ -76,7 +76,7 @@ func consumeStore(topics []string, master sarama.Consumer) (chan *sarama.Consume
 							fmt.Println("Error Delete : ", err.Error())
 							log.Fatal(err)
 						}
-						err = repository.DeleteStores(&store)
+						err = store2.DeleteStores(&store)
 						if err != nil {
 							log.Fatal(err)
 						}

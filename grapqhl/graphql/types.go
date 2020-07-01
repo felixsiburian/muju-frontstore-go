@@ -55,3 +55,42 @@ var storeType = graphql.NewObject(graphql.ObjectConfig{
 		},
 	},
 })
+
+var cityType = graphql.NewObject(graphql.ObjectConfig{
+	Name: "City",
+	Fields: graphql.Fields{
+		"province_id": &graphql.Field{
+			Type: graphql.Int,
+		},
+		"id": &graphql.Field{
+			Type: graphql.Int,
+		},
+		"city_name": &graphql.Field{
+			Type: graphql.String,
+		},
+	},
+})
+
+var provinceType = graphql.NewObject(graphql.ObjectConfig{
+	Name: "Province",
+	Fields: graphql.Fields{
+		"id": &graphql.Field{
+			Type: graphql.Int,
+		},
+		"province_name": &graphql.Field{
+			Type: graphql.String,
+		},
+	},
+})
+
+var countryType = graphql.NewObject(graphql.ObjectConfig{
+	Name: "Country",
+	Fields: graphql.Fields{
+		"id": &graphql.Field{
+			Type: graphql.Int,
+		},
+		"country": &graphql.Field{
+			Type: graphql.String,
+		},
+	},
+})

@@ -28,6 +28,23 @@ func NewRoot() *Root {
 						},
 						Resolve: StoreResolver,
 					},
+					"city": &graphql.Field{
+						Type: graphql.NewList(cityType),
+						Args: graphql.FieldConfigArgument{
+							"prov_id": &graphql.ArgumentConfig{
+								Type: graphql.Int,
+							},
+						},
+						Resolve: CityResolver,
+					},
+					"province":&graphql.Field{
+						Type: graphql.NewList(provinceType),
+						Resolve: ProvinceResolver,
+					},
+					"country": &graphql.Field{
+						Type: graphql.NewList(countryType),
+						Resolve: CountryResolver,
+					},
 				},
 			},
 		),

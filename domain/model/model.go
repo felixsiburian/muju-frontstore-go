@@ -28,7 +28,7 @@ type Country struct {
 
 type Province struct {
 	Id           int    `gorm:"AUTO_INCREMENT;PRIMARY_KEY;NOT NULL"; json:"id"'`
-	ProvinceName string `json:"province_name"` 
+	ProvinceName string `json:"province_name"`
 }
 
 type City struct {
