@@ -11,8 +11,7 @@ func main() {
 	fmt.Println("Welcome to Webserver")
 	db := database.ConnectionDB()
 	//Migrate table
-	db.AutoMigrate(&model.Store{}, &model.Country{}, &model.PackageType{},
-		&model.ProductCategory{}, &model.Template{}, &model.Province{}, &model.City{})
+	db.AutoMigrate(&model.Template{})
 	e := router.New()
 	e.Start(":8000")
 }

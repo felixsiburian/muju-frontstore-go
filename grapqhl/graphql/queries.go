@@ -37,13 +37,46 @@ func NewRoot() *Root {
 						},
 						Resolve: CityResolver,
 					},
-					"province":&graphql.Field{
-						Type: graphql.NewList(provinceType),
+					"province": &graphql.Field{
+						Type:    graphql.NewList(provinceType),
 						Resolve: ProvinceResolver,
 					},
 					"country": &graphql.Field{
-						Type: graphql.NewList(countryType),
+						Type:    graphql.NewList(countryType),
 						Resolve: CountryResolver,
+					},
+					"package": &graphql.Field{
+						Type: graphql.NewList(packageType),
+						Args: graphql.FieldConfigArgument{
+							"page": &graphql.ArgumentConfig{
+								Type: graphql.Int,
+							},
+							"size": &graphql.ArgumentConfig{
+								Type: graphql.Int,
+							},
+						},
+						Resolve: PackageResolve,
+					},
+					"template": &graphql.Field{
+						Type: graphql.NewList(templateType),
+						Args: graphql.FieldConfigArgument{
+							"page": &graphql.ArgumentConfig{
+								Type: graphql.Int,
+							},
+							"size": &graphql.ArgumentConfig{
+								Type: graphql.Int,
+							},
+							"cat": &graphql.ArgumentConfig{
+								Type: graphql.Int,
+							},
+						},
+						Resolve: TemplateResolver,
+					},
+					"category": &graphql.Field{
+						Type: graphql.NewList(categoryType),
+						Args: graphql.FieldConfigArgument{
+						},
+						Resolve: CategoryResolver,
 					},
 				},
 			},

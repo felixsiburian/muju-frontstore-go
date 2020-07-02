@@ -20,11 +20,20 @@ var storeType = graphql.NewObject(graphql.ObjectConfig{
 		"country_id": &graphql.Field{
 			Type: graphql.Int,
 		},
+		"country_name": &graphql.Field{
+			Type: graphql.String,
+		},
 		"province_id": &graphql.Field{
 			Type: graphql.Int,
 		},
+		"province_name": &graphql.Field{
+			Type: graphql.String,
+		},
 		"city_id": &graphql.Field{
 			Type: graphql.Int,
+		},
+		"city_name": &graphql.Field{
+			Type: graphql.String,
 		},
 		"postal_code": &graphql.Field{
 			Type: graphql.String,
@@ -91,6 +100,105 @@ var countryType = graphql.NewObject(graphql.ObjectConfig{
 		},
 		"country": &graphql.Field{
 			Type: graphql.String,
+		},
+	},
+})
+
+var packageType = graphql.NewObject(graphql.ObjectConfig{
+	Name: "Package",
+	Fields: graphql.Fields{
+		"id": &graphql.Field{
+			Type: graphql.Int,
+		},
+		"package_name": &graphql.Field{
+			Type: graphql.String,
+		},
+		"package_price": &graphql.Field{
+			Type: graphql.Int,
+		},
+		"created_by": &graphql.Field{
+			Type: graphql.String,
+		},
+		"created_date": &graphql.Field{
+			Type: graphql.DateTime,
+		},
+		"modified_by": &graphql.Field{
+			Type: graphql.String,
+		},
+		"modified_date": &graphql.Field{
+			Type: graphql.DateTime,
+		},
+		"deleted_by": &graphql.Field{
+			Type: graphql.String,
+		},
+		"deleted_date": &graphql.Field{
+			Type: graphql.DateTime,
+		},
+		"active": &graphql.Field{
+			Type: graphql.Boolean,
+		},
+		"is_deleted": &graphql.Field{
+			Type: graphql.Boolean,
+		},
+	},
+})
+
+var categoryType = graphql.NewObject(graphql.ObjectConfig{
+	Name: "Category",
+	Fields: graphql.Fields{
+		"id": &graphql.Field{
+			Type: graphql.Int,
+		},
+		"product_category": &graphql.Field{
+			Type: graphql.String,
+		},
+	},
+})
+
+var templateType = graphql.NewObject(graphql.ObjectConfig{
+	Name: "Template",
+	Fields: graphql.Fields{
+		"id": &graphql.Field{
+			Type: graphql.Int,
+		},
+		"template_name": &graphql.Field{
+			Type: graphql.String,
+		},
+		"template_price": &graphql.Field{
+			Type: graphql.Int,
+		},
+		"url_demo": &graphql.Field{
+			Type: graphql.String,
+		},
+		"product_category_id": &graphql.Field{
+			Type: graphql.Int,
+		},
+		"product_category": &graphql.Field{
+			Type: graphql.String,
+		},
+		"created_by": &graphql.Field{
+			Type: graphql.String,
+		},
+		"created_date": &graphql.Field{
+			Type: graphql.DateTime,
+		},
+		"modified_by": &graphql.Field{
+			Type: graphql.String,
+		},
+		"modified_date": &graphql.Field{
+			Type: graphql.DateTime,
+		},
+		"deleted_by": &graphql.Field{
+			Type: graphql.String,
+		},
+		"deleted_date": &graphql.Field{
+			Type: graphql.DateTime,
+		},
+		"active": &graphql.Field{
+			Type: graphql.Boolean,
+		},
+		"is_deleted": &graphql.Field{
+			Type: graphql.Boolean,
 		},
 	},
 })

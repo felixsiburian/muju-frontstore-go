@@ -16,8 +16,11 @@ func CreateStores(store *model.Store) error {
 		StoreDomain:       store.StoreDomain,
 		ProductCategoryId: store.ProductCategoryId,
 		CountryId:         store.CountryId,
+		CountryName:       "tmp",
 		ProvinceId:        store.ProvinceId,
+		ProvinceName:      "tmp",
 		CityId:            store.CityId,
+		CityName:          "tmp",
 		PostalCode:        store.PostalCode,
 		CreatedBy:         "Admin",
 		CreatedDate:       time.Now(),
@@ -99,8 +102,11 @@ func GetStore(page *int, size *int) []model.Store {
 			&s.StoreDomain,
 			&s.ProductCategoryId,
 			&s.CountryId,
+			&s.CountryName,
 			&s.ProvinceId,
+			&s.ProvinceName,
 			&s.CityId,
+			&s.CityName,
 			&s.PostalCode,
 			&s.CreatedBy,
 			&s.CreatedDate,
@@ -112,6 +118,21 @@ func GetStore(page *int, size *int) []model.Store {
 			&s.IsDeleted,
 		)
 
+		country := new(model.Country)
+		db.Table("countries").Select("countries.country").
+			Where("id = ?", s.CountryId).First(&country)
+		s.CountryName = country.Country
+
+		province := new(model.Province)
+		db.Table("provinces").Select("provinces.province_name").
+			Where("id = ?", s.ProvinceId).First(&province)
+		s.ProvinceName = province.ProvinceName
+
+		city := new(model.City)
+		db.Table("cities").Select("cities.city_name").
+			Where("id = ?", s.CityId).First(&city)
+		s.CityName = city.CityName
+		
 		result = append(result, *s)
 	}
 	defer db.Close()

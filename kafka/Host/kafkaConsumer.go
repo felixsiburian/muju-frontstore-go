@@ -8,5 +8,7 @@ import (
 func StartkafkaStore() {
 	fmt.Println("Kafka Catalog is Starting")
 	go Consumer.NewStoresConsumer()
+	go Consumer.NewPackageConsumer()
+	go Consumer.NewTemplateConsumer()
 }
 

@@ -16,6 +16,6 @@ func ConnectionDB() *gorm.DB {
 		fmt.Println("Failed Connect to Database", err.Error())
 		panic("failed to connect to database")
 	}
-
+	fmt.Println("Connected to Database : ", os.Getenv("DB_DRIVER_SQL"))
 	return db
 }

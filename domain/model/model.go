@@ -8,8 +8,11 @@ type Store struct {
 	StoreDomain       string    `json:"store_domain"`
 	ProductCategoryId int       `json:"product_category_id"`
 	CountryId         int       `json:"country_id"`
+	CountryName       string    `json:"country_name"`
 	ProvinceId        int       `json:"province_id"`
+	ProvinceName      string    `json:"province_name"`
 	CityId            int       `json:"city_id"`
+	CityName          string    `json:"city_name"`
 	PostalCode        string    `json:"postal_code"`
 	CreatedBy         string    `json:"created_by"`
 	CreatedDate       time.Time `json:"created_date"`
@@ -61,9 +64,17 @@ type Transaction struct {
 }
 
 type PackageType struct {
-	Id           int    `gorm:"AUTO_INCREMENT;PRIMARY_KEY;NOT NULL"; json:"id"'`
-	PackageName  string `json:"package_name"`
-	PackagePrice int    `json:"package_price"`
+	Id           int       `gorm:"AUTO_INCREMENT;PRIMARY_KEY;NOT NULL"; json:"id"'`
+	PackageName  string    `json:"package_name"`
+	PackagePrice int       `json:"package_price"`
+	CreatedDate  time.Time `json:"created_date"`
+	CreatedBy    string    `json:"created_by"`
+	ModifiedDate time.Time `json:"modified_date"`
+	ModifiedBy   string    `json:"modified_by"`
+	DeletedDate  time.Time `json:"deleted_date"`
+	DeletedBy    string    `json:"deleted_by"`
+	Active       bool      `json:"active"`
+	IsDeleted    bool      `json:"is_deleted"`
 }
 
 type ProductCategory struct {
@@ -72,9 +83,18 @@ type ProductCategory struct {
 }
 
 type Template struct {
-	Id                int    `gorm:"AUTO_INCREMENT;PRIMARY_KEY;NOT NULL"; json:"id"'`
-	TemplateName      string `json:"template_name"`
-	TemplatePrice     string `json:"template_price"`
-	UrlDemo           string `json:"url_demo"`
-	ProductCategoryId int    `json:"product_category_id"`
+	Id                int       `gorm:"AUTO_INCREMENT;PRIMARY_KEY;NOT NULL"; json:"id"'`
+	TemplateName      string    `json:"template_name"`
+	TemplatePrice     int       `json:"template_price"`
+	UrlDemo           string    `json:"url_demo"`
+	ProductCategoryId int       `json:"product_category_id"`
+	ProductCategory   string    `json:"product_category"`
+	CreatedDate       time.Time `json:"created_date"`
+	CreatedBy         string    `json:"created_by"`
+	ModifiedDate      time.Time `json:"modified_date"`
+	ModifiedBy        string    `json:"modified_by"`
+	DeletedDate       time.Time `json:"deleted_date"`
+	DeletedBy         string    `json:"deleted_by"`
+	Active            bool      `json:"active"`
+	IsDeleted         bool      `json:"is_deleted"`
 }
