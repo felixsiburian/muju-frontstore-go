@@ -9,6 +9,53 @@ import (
 	"time"
 )
 
+//type StoreRepository interface {
+//	CreateStores(store *model.Store) error
+//	UpdateStores(store *model.Store) error
+//	DeleteStores(store *model.Store) error
+//}
+
+//type store_repo struct {
+//	DB *gorm.DB
+//}
+
+//func Store_Repository(db *gorm.DB) StoreRepository {
+//	return &store_repo{
+//		DB: db,
+//	}
+//}
+
+//func (s store_repo) CreateStores(store *model.Store) error {
+//	db := database.ConnDB()
+//	db.AutoMigrate(&model.Store{})
+//	stores := model.Store{
+//		StoreName:         store.StoreName,
+//		StoreDomain:       store.StoreDomain,
+//		ProductCategoryId: store.ProductCategoryId,
+//		CountryId:         store.CountryId,
+//		CountryName:       "tmp",
+//		ProvinceId:        store.ProvinceId,
+//		ProvinceName:      "tmp",
+//		CityId:            store.CityId,
+//		CityName:          "tmp",
+//		PostalCode:        store.PostalCode,
+//		CreatedBy:         "Admin",
+//		CreatedDate:       time.Now(),
+//		ModifiedBy:        "Admin",
+//		ModifiedDate:      time.Now(),
+//		DeletedBy:         "Admin",
+//		DeletedDate:       time.Now(),
+//		Active:            true,
+//		IsDeleted:         false,
+//	}
+//	err := db.Debug().Create(&stores).Error
+//	if err != nil {
+//		log.Fatal(err)
+//	}
+//	defer db.Close()
+//	return err
+//}
+
 func CreateStores(store *model.Store) error {
 	db := database.ConnectionDB()
 	stores := model.Store{
@@ -39,6 +86,24 @@ func CreateStores(store *model.Store) error {
 	return err
 }
 
+//func (s store_repo) UpdateStores(store *model.Store) error {
+//	db := database.ConnDB()
+//	err := db.Debug().Model(&store).Where("id = ?", store.Id).Updates(map[string]interface{}{
+//		"store_name":          store.StoreName,
+//		"store_domain":        store.StoreDomain,
+//		"product_category_id": store.ProductCategoryId,
+//		"country_id":          store.CountryId,
+//		"province_id":         store.ProvinceId,
+//		"city_id":             store.CityId,
+//		"postal_code":         store.PostalCode,
+//	}).Error
+//	if err != nil {
+//		log.Fatal(err)
+//	}
+//	defer db.Close()
+//	return err
+//}
+
 func UpdateStores(store *model.Store) error {
 	db := database.ConnectionDB()
 	err := db.Debug().Model(&store).Where("id = ?", store.Id).Updates(map[string]interface{}{
@@ -56,6 +121,20 @@ func UpdateStores(store *model.Store) error {
 	defer db.Close()
 	return err
 }
+
+//func (s store_repo) DeleteStores(store *model.Store) error {
+//	db := database.ConnDB()
+//	err := db.Debug().Model(&store).Where("id = ?", store.Id).Updates(map[string]interface{}{
+//		"active":     false,
+//		"is_deleted": true,
+//	}).Error
+//	if err != nil {
+//		log.Fatal(err)
+//	}
+//	store.DeletedDate = time.Now()
+//	defer db.Close()
+//	return err
+//}
 
 func DeleteStores(store *model.Store) error {
 	db := database.ConnectionDB()
@@ -132,7 +211,7 @@ func GetStore(page *int, size *int) []model.Store {
 		db.Table("cities").Select("cities.city_name").
 			Where("id = ?", s.CityId).First(&city)
 		s.CityName = city.CityName
-		
+
 		result = append(result, *s)
 	}
 	defer db.Close()

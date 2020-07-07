@@ -8,6 +8,22 @@ import (
 	"time"
 )
 
+//type PackageRepository interface {
+//	CreatePackage(packages *model.PackageType) error
+//	UpdatePackage(packages *model.PackageType) error
+//	DeletePackage(packages *model.PackageType) error
+//}
+
+//type pkg_repo struct {
+//	DB *gorm.DB
+//}
+
+//func Pkg_Repository(db *gorm.DB) PackageRepository {
+//	return &pkg_repo{
+//		DB: db,
+//	}
+//}
+
 func CreatePackage(packages *model.PackageType) error {
 	db := database.ConnectionDB()
 	pkg := model.PackageType{
@@ -30,6 +46,29 @@ func CreatePackage(packages *model.PackageType) error {
 	return err
 }
 
+//func (p pkg_repo) CreatePackage(packages *model.PackageType) error {
+//	db := database.ConnDB()
+//	db.AutoMigrate(&model.PackageType{})
+//	pkg := model.PackageType{
+//		PackageName:  packages.PackageName,
+//		PackagePrice: packages.PackagePrice,
+//		CreatedDate:  time.Now(),
+//		CreatedBy:    "Admin",
+//		ModifiedDate: time.Now(),
+//		ModifiedBy:   "Admin",
+//		DeletedDate:  time.Now(),
+//		DeletedBy:    "Admin",
+//		Active:       true,
+//		IsDeleted:    false,
+//	}
+//	err := db.Debug().Create(&pkg).Error
+//	if err != nil {
+//		log.Fatal(err)
+//	}
+//	defer db.Close()
+//	return err
+//}
+
 func UpdatePackage(packages *model.PackageType) error {
 	db := database.ConnectionDB()
 	err := db.Debug().Model(&packages).Updates(map[string]interface{}{
@@ -44,6 +83,20 @@ func UpdatePackage(packages *model.PackageType) error {
 	return err
 }
 
+//func (p pkg_repo) UpdatePackage(packages *model.PackageType) error {
+//	db := database.ConnDB()
+//	err := db.Debug().Model(&packages).Updates(map[string]interface{}{
+//		"package_name":  packages.PackageName,
+//		"package_price": packages.PackagePrice,
+//		"modified_date": time.Now(),
+//	}).Error
+//	if err != nil {
+//		log.Fatal(err)
+//	}
+//	defer db.Close()
+//	return err
+//}
+
 func DeletePackage(packages *model.PackageType) error {
 	db := database.ConnectionDB()
 	err := db.Debug().Model(&packages).Updates(map[string]interface{}{
@@ -57,6 +110,20 @@ func DeletePackage(packages *model.PackageType) error {
 	defer db.Close()
 	return err
 }
+
+//func (p pkg_repo) DeletePackage(packages *model.PackageType) error {
+//	db := database.ConnDB()
+//	err := db.Debug().Model(&packages).Updates(map[string]interface{}{
+//		"active":       false,
+//		"is_deleted":   true,
+//		"deleted_date": time.Now(),
+//	}).Error
+//	if err != nil {
+//		log.Fatal(err)
+//	}
+//	defer db.Close()
+//	return err
+//}
 
 func GetPackage(page *int, size *int) []model.PackageType {
 	db := database.ConnectionDB()

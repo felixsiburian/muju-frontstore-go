@@ -8,6 +8,47 @@ import (
 	"time"
 )
 
+//type TemplateRepository interface {
+//	CreateTemplate(templates *model.Template) error
+//	UpdateTemplate(templates *model.Template) error
+//	DeleteTemplate(templates *model.Template) error
+//}
+
+//type tmp_repo struct {
+//	DB *gorm.DB
+//}
+
+//func Tmp_Repository(db *gorm.DB) TemplateRepository {
+//	return &tmp_repo{
+//		DB: db,
+//	}
+//}
+
+//func (t tmp_repo) CreateTemplate(templates *model.Template) error {
+//	db := database.ConnDB()
+//	db.AutoMigrate(&model.Template{})
+//	template := model.Template{
+//		TemplateName:      templates.TemplateName,
+//		TemplatePrice:     templates.TemplatePrice,
+//		UrlDemo:           templates.UrlDemo,
+//		ProductCategoryId: templates.ProductCategoryId,
+//		ProductCategory:   "tmp",
+//		CreatedDate:       time.Now(),
+//		CreatedBy:         "Admin",
+//		ModifiedDate:      time.Now(),
+//		ModifiedBy:        "Admin",
+//		DeletedDate:       time.Now(),
+//		DeletedBy:         "Admin",
+//		Active:            true,
+//		IsDeleted:         false,
+//	}
+//	err := db.Debug().Create(&template).Error
+//	if err != nil {
+//		log.Fatal(err)
+//	}
+//	return err
+//}
+
 func CreateTemplate(templates *model.Template) error {
 	db := database.ConnectionDB()
 	template := model.Template{
@@ -32,6 +73,20 @@ func CreateTemplate(templates *model.Template) error {
 	return err
 }
 
+//func (t tmp_repo) UpdateTemplate(templates *model.Template) error {
+//	db := database.ConnDB()
+//
+//	err := db.Debug().Model(&templates).Updates(map[string]interface{}{
+//		"template_name":  templates.TemplateName,
+//		"template_price": templates.TemplatePrice,
+//		"modified_date":  time.Now(),
+//	}).Error
+//	if err != nil {
+//		log.Fatal(err)
+//	}
+//	return err
+//}
+
 func UpdateTemplate(templates *model.Template) error {
 	db := database.ConnectionDB()
 
@@ -45,6 +100,22 @@ func UpdateTemplate(templates *model.Template) error {
 	}
 	return err
 }
+
+//func (t tmp_repo) DeleteTemplate(templates *model.Template) error {
+//	db := database.ConnDB()
+//
+//	err := db.Debug().Model(&templates).Updates(map[string]interface{}{
+//		"active":       false,
+//		"is_deleted":   true,
+//		"deleted_date": time.Now(),
+//	}).Error
+//
+//	if err != nil {
+//		log.Fatal(err)
+//	}
+//
+//	return err
+//}
 
 func DeleteTemplate(templates *model.Template) error {
 	db := database.ConnectionDB()

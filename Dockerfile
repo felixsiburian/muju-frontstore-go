@@ -1,17 +1,26 @@
-FROM golang
+# Builder
+FROM golang:1.13.1-alpine3.10 as builder
 
-ADD . /go/src/github.com/felixsiburian/muju-frontstore-go
-WORKDIR /go/src/github.com/felixsiburian/muju-frontstore-go
+RUN apk update && apk upgrade && \
+    apk --update add git make
 
-RUN go get -d -v ./...
+WORKDIR /app
 
-RUN go install -v ./...
+COPY . .
 
-RUN go build -o main .
+RUN make engine
 
-EXPOSE 80
+# Distribution
+FROM alpine:latest
 
-# RUN go run main.go
+RUN apk update && apk upgrade && \
+    apk --no-cache --update add ca-certificates tzdata && \
+    mkdir /app
 
-CMD ["./main"]
-#ENTRYPOINT ["go", "main.go"]
+WORKDIR /app 
+
+EXPOSE 8000
+
+COPY --from=builder /app/engine /app
+
+CMD /app/engine
