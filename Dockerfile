@@ -1,26 +1,11 @@
-# Builder
-FROM golang:1.13.1-alpine3.10 as builder
-
-RUN apk update && apk upgrade && \
-    apk --update add git make
-
+FROM golang:1.13.1-alpine3.9
+RUN mkdir /app
+ADD . /app
 WORKDIR /app
-
-COPY . .
-
-RUN make engine
-
-# Distribution
-FROM alpine:latest
-
-RUN apk update && apk upgrade && \
-    apk --no-cache --update add ca-certificates tzdata && \
-    mkdir /app
-
-WORKDIR /app 
-
-EXPOSE 8000
-
-COPY --from=builder /app/engine /app
-
-CMD /app/engine
+# Add this go mod download command to pull in any dependencies
+RUN go mod download
+# Our project will now successfully build with the necessary go libraries included.
+RUN go build -o main .
+# Our start command which kicks off
+# our newly created binary executable
+CMD ["/app/main"]
