@@ -1,11 +1,17 @@
-FROM golang:1.13.1-alpine3.9
-RUN mkdir /app
-ADD . /app
-WORKDIR /app
-# Add this go mod download command to pull in any dependencies
-RUN go mod download
-# Our project will now successfully build with the necessary go libraries included.
+FROM golang
+
+ADD . /go/src/github.com/felixsiburian/muju-frontstore-go
+WORKDIR /go/src/github.com/felixsiburian/muju-frontstore-go
+
+RUN go get -d -v ./...
+
+RUN go install -v ./...
+
 RUN go build -o main .
-# Our start command which kicks off
-# our newly created binary executable
-CMD ["/app/main"]
+
+EXPOSE 80
+
+# RUN go run main.go
+
+CMD ["./main"]
+#ENTRYPOINT ["go", "main.go"]
