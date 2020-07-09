@@ -7,9 +7,9 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    env_file:
-      - .env
-    environment:
-      - KAFKA_IP=52.185.161.109:9092
+    #env_file:
+     # - .env
+    #environment:
+     # - KAFKA_IP=52.185.161.109:9092
     ports:
       - "3000:80"

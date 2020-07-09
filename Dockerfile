@@ -9,7 +9,7 @@ RUN go install -v ./...
 
 RUN go build -o main .
 
-EXPOSE 80
+EXPOSE 8000
 
 # RUN go run main.go
 

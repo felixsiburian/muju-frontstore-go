@@ -10,7 +10,6 @@ import (
 	"muju-frontstore-go/domain/model"
 	"muju-frontstore-go/kafka/Host/Config"
 	"net/http"
-	"os"
 )
 
 func PublishCreatePackage(c echo.Context) error {
@@ -26,7 +25,7 @@ func PublishCreatePackage(c echo.Context) error {
 
 	kafkaConfig := Config.GetKafkaConfig("", "")
 
-	producer, err := sarama.NewSyncProducer([]string{os.Getenv("KAFKA_IP")}, kafkaConfig)
+	producer, err := sarama.NewSyncProducer([]string{"52.185.161.109:9092"}, kafkaConfig)
 
 	if err != nil {
 

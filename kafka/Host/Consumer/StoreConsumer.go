@@ -92,7 +92,7 @@ func consumeStore(topics []string, master sarama.Consumer) (chan *sarama.Consume
 
 func NewStoresConsumer() {
 	godotenv.Load(".env")
-	brokers := []string{os.Getenv("KAFKA_IP")}
+	brokers := []string{"52.185.161.109:9092"}
 
 	kafkaConfig := Config.GetKafkaConfig("", "")
 
