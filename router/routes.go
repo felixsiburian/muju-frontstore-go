@@ -5,6 +5,7 @@ import (
 	"github.com/labstack/echo"
 	"github.com/labstack/echo/middleware"
 	"muju-frontstore-go/kafka/API/Store"
+	"muju-frontstore-go/kafka/API/Transactions"
 	"muju-frontstore-go/kafka/API/packageType"
 	"muju-frontstore-go/kafka/API/template"
 	"muju-frontstore-go/kafka/Host"
@@ -38,5 +39,9 @@ func New() *echo.Echo {
 	e.POST("/CreateTemplate", template.PublishCreateTemplate)
 	e.POST("/UpdateTemplate", template.PublishUpdateTemplate)
 	e.POST("/DeleteTemplate", template.PublishDeleteTemplate)
+
+	e.POST("/CreateTransaction", Transactions.PublishCreateTransaction)
+	e.POST("/UpdateTransaction", Transactions.PublishUpdateTransaction)
+	e.POST("/DeleteTransaction", Transactions.PublishDeleteTransaction)
 	return e
 }

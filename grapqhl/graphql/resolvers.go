@@ -8,6 +8,7 @@ import (
 	"muju-frontstore-go/domain/repository/country"
 	pkg "muju-frontstore-go/domain/repository/packageType"
 	"muju-frontstore-go/domain/repository/store"
+	"muju-frontstore-go/domain/repository/transaction"
 )
 
 func StoreResolver(p graphql.ResolveParams) (interface{}, error) {
@@ -62,7 +63,7 @@ func PackageResolve(p graphql.ResolveParams) (interface{}, error) {
 	return pkgs, nil
 }
 
-func TemplateResolver(p graphql.ResolveParams)(interface{}, error){
+func TemplateResolver(p graphql.ResolveParams) (interface{}, error) {
 	page, ok := p.Args["page"].(int)
 	size, sip := p.Args["size"].(int)
 	cat, cats := p.Args["cat"].(int)
@@ -81,7 +82,26 @@ func TemplateResolver(p graphql.ResolveParams)(interface{}, error){
 	return tmps, nil
 }
 
-func CategoryResolver(p graphql.ResolveParams)(interface{}, error) {
+func CategoryResolver(p graphql.ResolveParams) (interface{}, error) {
 	cat := categories.GetCategories()
 	return cat, nil
+}
+
+func TransactionResolver(p graphql.ResolveParams) (interface{}, error) {
+	page, ok := p.Args["page"].(int)
+	size, sip := p.Args["size"].(int)
+	storeid, sid := p.Args["store_id"].(int)
+
+	if ok && sip && sid {
+		fmt.Println("masuk 1")
+		var pages *int = &page
+		var sizes *int = &size
+		var stores *int = &storeid
+		trs := transaction.GetTransaction(pages, sizes, stores)
+		fmt.Println("transaction : ", trs)
+		return trs, nil
+	}
+
+	trss := transaction.GetTransaction(nil,nil,nil)
+	return trss, nil
 }

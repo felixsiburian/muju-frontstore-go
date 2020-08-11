@@ -78,6 +78,21 @@ func NewRoot() *Root {
 						},
 						Resolve: CategoryResolver,
 					},
+					"transaction": &graphql.Field{
+						Type: graphql.NewList(transactionType),
+						Args: graphql.FieldConfigArgument{
+							"page": &graphql.ArgumentConfig{
+									Type: graphql.Int,
+							},
+							"size": &graphql.ArgumentConfig{
+								Type: graphql.Int,
+							},
+							"store_id": &graphql.ArgumentConfig{
+								Type: graphql.Int,
+							},
+						},
+						Resolve: TransactionResolver,
+					},
 				},
 			},
 		),

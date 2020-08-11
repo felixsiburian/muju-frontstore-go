@@ -202,3 +202,81 @@ var templateType = graphql.NewObject(graphql.ObjectConfig{
 		},
 	},
 })
+
+var transactionType = graphql.NewObject(graphql.ObjectConfig{
+	Name: "Transaction",
+	Fields: graphql.Fields{
+		"id": &graphql.Field{
+			Type: graphql.String,
+		},
+		"order_id": &graphql.Field{
+			Type: graphql.Int,
+		},
+		"store_id": &graphql.Field{
+			Type: graphql.Int,
+		},
+		"store_name": &graphql.Field{
+			Type: graphql.String,
+		},
+		"package_id": &graphql.Field{
+			Type: graphql.Int,
+		},
+		"package_name": &graphql.Field{
+			Type: graphql.String,
+		},
+		"template_id": &graphql.Field{
+			Type: graphql.Int,
+		},
+		"template_name": &graphql.Field{
+			Type: graphql.String,
+		},
+		"package_price": &graphql.Field{
+			Type: graphql.Int,
+		},
+		"template_price": &graphql.Field{
+			Type: graphql.Int,
+		},
+		"invoice_date": &graphql.Field{
+			Type: graphql.String,
+		},
+		"start_period": &graphql.Field{
+			Type: graphql.String,
+		},
+		"end_period": &graphql.Field{
+			Type: graphql.String,
+		},
+		"total_price": &graphql.Field{
+			Type: graphql.Int,
+		},
+		"payment_date": &graphql.Field{
+			Type: graphql.String,
+		},
+		"payment_method": &graphql.Field{
+			Type: graphql.String,
+		},
+		"created_by": &graphql.Field{
+			Type: graphql.String,
+		},
+		"created_date": &graphql.Field{
+			Type: graphql.DateTime,
+		},
+		"modified_by": &graphql.Field{
+			Type: graphql.String,
+		},
+		"modified_date": &graphql.Field{
+			Type: graphql.DateTime,
+		},
+		"deleted_by": &graphql.Field{
+			Type: graphql.String,
+		},
+		"deleted_date": &graphql.Field{
+			Type: graphql.DateTime,
+		},
+		"active": &graphql.Field{
+			Type: graphql.Boolean,
+		},
+		"is_deleted": &graphql.Field{
+			Type: graphql.Boolean,
+		},
+	},
+})

@@ -5,6 +5,7 @@ go 1.13
 require (
 	github.com/DATA-DOG/go-sqlmock v1.4.1
 	github.com/Shopify/sarama v1.26.4
+	github.com/beevik/guid v0.0.0-20170504223318-d0ea8faecee0
 	github.com/dgrijalva/jwt-go v3.2.0+incompatible // indirect
 	github.com/graphql-go/graphql v0.7.9
 	github.com/gregoryv/nexus v0.4.0 // indirect

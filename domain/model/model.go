@@ -36,31 +36,35 @@ type Province struct {
 
 type City struct {
 	ProvinceId int    `json:"province_id"`
-	Id         int    `gorm:"AUTO_INCREMENT;PRIMARY_KEY;NOT NULL"; json:"id"'`
+	Id         int    `gorm:"AUTO_INCREMENT;PRIMARY_KEY;NOT NULL" json:"id"`
 	CityName   string `json:"city_name"`
 }
 
 type Transaction struct {
-	Id                int       `gorm:"AUTO_INCREMENT;PRIMARY_KEY;NOT NULL"; json:"id"'`
-	TransactionNumber int       `json:"transaction_number"`
-	StoreId           int       `json:"store_id"`
-	PackageId         int       `json:"package_id"`
-	TemplateId        int       `json:"template_id"`
-	PackagePrice      int       `json:"package_price"`
-	TemplatePrice     int       `json:"template_price"`
-	StartPeriod       string    `json:"start_period"`
-	EndPeriod         string    `json:"end_period"`
-	TotalPrice        int       `json:"total_price"`
-	PaymentDate       string    `json:"payment_date"`
-	PaymentMethod     string    `json:"payment_method"`
-	CreatedBy         string    `json:"created_by"`
-	CreatedDate       time.Time `json:"created_date"`
-	ModifiedBy        string    `json:"modified_by"`
-	ModifiedDate      time.Time `json:"modified_date"`
-	DeletedBy         string    `json:"deleted_by"`
-	DeletedAt         time.Time `json:"deleted_at"`
-	Active            bool      `json:"active"`
-	IsDeleted         bool      `json:"is_deleted"`
+	Id            string    `json:"id"`
+	OrderId       int       `gorm:"AUTO_INCREMENT;PRIMARY_KEY;NOT NULL;" json:"order_id" `
+	StoreId       int       `json:"store_id"`
+	StoreName     string    `json:"store_name"`
+	PackageId     int       `json:"package_id"`
+	PackageName   string    `json:"package_name"`
+	TemplateId    int       `json:"template_id"`
+	TemplateName  string    `json:"template_name"`
+	PackagePrice  int       `json:"package_price"`
+	TemplatePrice int       `json:"template_price"`
+	InvoiceDate   string    `json:"invoice_date"`
+	StartPeriod   string    `json:"start_period"`
+	EndPeriod     string    `json:"end_period"`
+	TotalPrice    int       `json:"total_price"`
+	PaymentDate   string    `json:"payment_date"`
+	PaymentMethod string    `json:"payment_method"`
+	CreatedBy     string    `json:"created_by"`
+	CreatedDate   time.Time `json:"created_date"`
+	ModifiedBy    string    `json:"modified_by"`
+	ModifiedDate  time.Time `json:"modified_date"`
+	DeletedBy     string    `json:"deleted_by"`
+	DeletedDate     time.Time `json:"deleted_date"`
+	Active        bool      `json:"active"`
+	IsDeleted     bool      `json:"is_deleted"`
 }
 
 type PackageType struct {

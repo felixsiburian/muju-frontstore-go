@@ -10,5 +10,6 @@ func StartkafkaStore() {
 	go Consumer.NewStoresConsumer()
 	go Consumer.NewPackageConsumer()
 	go Consumer.NewTemplateConsumer()
+	go Consumer.NewTransactionConsumer()
 }
 

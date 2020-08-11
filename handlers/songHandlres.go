@@ -22,7 +22,7 @@ func Query(c echo.Context) error {
 
 	err := json.NewDecoder(c.Request().Body).Decode(&rBody)
 	if err != nil {
-		log.Printf("Failed Processing request: %s\n",err)
+		log.Printf("Failed Processing request: %s\n",err.Error())
 		return echo.NewHTTPError(http.StatusInternalServerError)
 	}
 	result := grapqhl.ExecuteQuery(rBody.Query)
